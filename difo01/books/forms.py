@@ -1,5 +1,6 @@
 from django import forms
-from .models import Book
+from django.forms.models import inlineformset_factory
+from .models import Book, Author
 
 
 class BookForm(forms.ModelForm):
@@ -9,3 +10,13 @@ class BookForm(forms.ModelForm):
             'title',
             'number_of_pages'
         )
+
+
+BookFormSet = inlineformset_factory(
+    Author,
+    Book,
+    form=BookForm,
+    min_num=1,  # minimum number of forms that must be filled in
+    extra=1,  # number of empty forms to display
+    can_delete=False,  # show a checkbox in each form to delete the row
+)
