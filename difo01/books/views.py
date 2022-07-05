@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
-from .forms import BookFormSet
+
 from .models import Author, Book
+from .forms import BookForm, BookFormSet
 
 
 def create_book(request, pk):
@@ -21,3 +22,11 @@ def create_book(request, pk):
     }
 
     return render(request, "create_book.html", context)
+
+
+def create_book_form(request):
+    form = BookForm()
+    context = {
+        "form": form
+    }
+    return render(request, "partials/book_form.html", context)
